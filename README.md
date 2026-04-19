@@ -79,27 +79,27 @@ Special focus was given to:
 
 Project Structure
 
-StudentManagementSystem/
+StudentManagementSystem/                     <br>
 │
-├── studentapp/
-│   ├── migrations/
-│   ├── templates/
-│   ├── static/
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   ├── admin.py
-│   └── forms.py
+├── studentapp/                              <br>
+│   ├── migrations/                          <br>
+│   ├── templates/                           <br>
+│   ├── static/                              <br>
+│   ├── models.py                            <br>
+│   ├── views.py                             <br>
+│   ├── urls.py                              <br>
+│   ├── admin.py                             <br>
+│   └── forms.py                             <br>
 │
-├── StudentManagementSystem/
-│   ├── settings.py
-│   ├── urls.py
-│   ├── asgi.py
-│   └── wsgi.py
+├── StudentManagementSystem/                 <br>
+│   ├── settings.py                          <br>
+│   ├── urls.py                              <br>
+│   ├── asgi.py                              <br>
+│   └── wsgi.py                              <br>
 │
-├── db.sqlite3
-├── manage.py
-└── README.md
+├── db.sqlite3                               <br>
+├── manage.py                                <br>
+└── README.md                                <br>
 
 ---
 
