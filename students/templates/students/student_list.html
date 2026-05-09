@@ -2,51 +2,57 @@
 
 {% block content %}
 
-<h2>Student List</h2>
+<h2>Dashboard</h2>
 
-<!-- Search Form -->
+<!-- Total Students -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card card-box p-3">
+            <h6>Total Students</h6>
+            <h2>{{ students|length }}</h2>
+        </div>
+    </div>
+</div>
+
+<!-- Search -->
 <form method="GET" class="mb-3">
-    <input type="text" name="q" class="form-control" placeholder="Search student">
+    <input type="text" name="q" class="form-control" placeholder="Search student...">
 </form>
 
-<!-- Student Table -->
-<table class="table table-striped">
+<!-- Table -->
+<div class="card card-box p-3">
 
-    <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Course</th>
-        <th>Age</th>
-        <th>Actions</th>
-    </tr>
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Course</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
+    <tbody>
     {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone }}</td>
+            <td>{{ student.course }}</td>
+            <td>{{ student.age }}</td>
 
-    <tr>
-        <td>{{ student.name }}</td>
-        <td>{{ student.email }}</td>
-        <td>{{ student.phone }}</td>
-        <td>{{ student.course }}</td>
-        <td>{{ student.age }}</td>
-
-        <td>
-            <!-- EDIT BUTTON -->
-            <a class="btn btn-warning btn-sm"
-               href="{% url 'edit_student' student.id %}">
-                Edit
-            </a>
-
-            <!-- DELETE BUTTON -->
-            <a class="btn btn-danger btn-sm"
-               href="{% url 'delete_student' student.id %}">
-                Delete
-            </a>
-        </td>
-    </tr>
-
+            <td>
+                <a href="/edit/{{ student.id }}/" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/delete/{{ student.id }}/" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
     {% endfor %}
-
+    </tbody>
 </table>
+
+</div>
 
 {% endblock %}

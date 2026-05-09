@@ -1,8 +1,33 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .models import Student
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('student_list')
+        else:
+            return render(request, 'students/login.html', {'error': 'Invalid credentials'})
+
+    return render(request, 'students/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
 
 # LIST + SEARCH
+@login_required
 def student_list(request):
     query = request.GET.get('q')
 
@@ -19,6 +44,7 @@ def student_list(request):
 
 
 # ADD STUDENT
+@login_required
 def add_student(request):
     if request.method == "POST":
         Student.objects.create(
@@ -34,6 +60,7 @@ def add_student(request):
 
 
 # EDIT STUDENT
+@login_required
 def edit_student(request, id):
     student = get_object_or_404(Student, id=id)
 
@@ -51,6 +78,7 @@ def edit_student(request, id):
 
 
 # DELETE STUDENT
+@login_required
 def delete_student(request, id):
     student = get_object_or_404(Student, id=id)
     student.delete()
