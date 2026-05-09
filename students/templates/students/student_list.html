@@ -4,40 +4,48 @@
 
 <h2>Student List</h2>
 
+<!-- Search Form -->
 <form method="GET" class="mb-3">
-
-<input type="text" name="q" class="form-control" placeholder="Search student">
-
+    <input type="text" name="q" class="form-control" placeholder="Search student">
 </form>
 
+<!-- Student Table -->
 <table class="table table-striped">
 
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Phone</th>
-<th>Course</th>
-<th>Age</th>
-<th>Actions</th>
-</tr>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Course</th>
+        <th>Age</th>
+        <th>Actions</th>
+    </tr>
 
-{% for student in students %}
+    {% for student in students %}
 
-<tr>
-<td>{{ student.name }}</td>
-<td>{{ student.email }}</td>
-<td>{{ student.phone }}</td>
-<td>{{ student.course }}</td>
-<td>{{ student.age }}</td>
+    <tr>
+        <td>{{ student.name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.phone }}</td>
+        <td>{{ student.course }}</td>
+        <td>{{ student.age }}</td>
 
-<td>
-<a class="btn btn-warning btn-sm" href="/edit/{{ student.id }}">Edit</a>
-<a class="btn btn-danger btn-sm" href="/delete/{{ student.id }}">Delete</a>
-</td>
+        <td>
+            <!-- EDIT BUTTON -->
+            <a class="btn btn-warning btn-sm"
+               href="{% url 'edit_student' student.id %}">
+                Edit
+            </a>
 
-</tr>
+            <!-- DELETE BUTTON -->
+            <a class="btn btn-danger btn-sm"
+               href="{% url 'delete_student' student.id %}">
+                Delete
+            </a>
+        </td>
+    </tr>
 
-{% endfor %}
+    {% endfor %}
 
 </table>
 

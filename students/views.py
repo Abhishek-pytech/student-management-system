@@ -1,13 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Q
 from .models import Student
 
+# LIST + SEARCH
 def student_list(request):
-    students = Student.objects.all()
-    return render(request, 'students/student_list.html', {'students': students})
-from django.db.models import Q
-
-def student_list(request):
-
     query = request.GET.get('q')
 
     if query:
@@ -21,31 +17,25 @@ def student_list(request):
 
     return render(request, 'students/student_list.html', {'students': students})
 
+
+# ADD STUDENT
 def add_student(request):
-    if request.method=="POST":
-        name=request.POST['name']
-        email=request.POST['email']
-        phone=request.POST['phone']
-        course=request.POST['course']
-        age=request.POST['age']
-    
-
-
+    if request.method == "POST":
         Student.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            course=course,
-            age=age,
-            
-
+            name=request.POST['name'],
+            email=request.POST['email'],
+            phone=request.POST['phone'],
+            course=request.POST['course'],
+            age=request.POST['age']
         )
-
         return redirect('student_list')
+
     return render(request, 'students/add_student.html')
 
+
+# EDIT STUDENT
 def edit_student(request, id):
-    student = Student.objects.get(id=id)
+    student = get_object_or_404(Student, id=id)
 
     if request.method == "POST":
         student.name = request.POST['name']
@@ -59,7 +49,9 @@ def edit_student(request, id):
 
     return render(request, 'students/edit_student.html', {'student': student})
 
+
+# DELETE STUDENT
 def delete_student(request, id):
-    student = Student.objects.get(id=id)
+    student = get_object_or_404(Student, id=id)
     student.delete()
     return redirect('student_list')
