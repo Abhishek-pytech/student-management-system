@@ -1,56 +1,129 @@
 {% extends 'students/base.html' %}
 
 {% block content %}
-<h2>Dashboard</h2>
 
-<!-- Total Students -->
+<h2 class="mb-3">Dashboard</h2>
+
+<!-- DASHBOARD CARDS -->
 <div class="row mb-4">
-    <div class="col-md-4">
-        <div class="card card-box p-3">
+
+    <div class="col-md-3">
+        <div class="card card-box p-3 bg-primary text-white">
             <h6>Total Students</h6>
-            <h2>{{ students|length }}</h2>
+            <h2>{{ total_students }}</h2>
         </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="card card-box p-3 bg-success text-white">
+            <h6>Present Today</h6>
+            <h2>{{ present_today }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card card-box p-3 bg-danger text-white">
+            <h6>Absent Today</h6>
+            <h2>{{ absent_today }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card card-box p-3 bg-dark text-white">
+            <h6>Total Attendance</h6>
+            <h2>{{ total_attendance }}</h2>
+        </div>
+    </div>
+
 </div>
 
-<!-- Search -->
+<!-- SEARCH -->
 <form method="GET" class="mb-3">
-    <input type="text" name="q" class="form-control" placeholder="Search student...">
+
+    <input type="text"
+           name="q"
+           class="form-control"
+           placeholder="Search student...">
+
 </form>
 
-<!-- Table -->
+<!-- STUDENT TABLE -->
 <div class="card card-box p-3">
 
-<table class="table table-hover">
-    <thead class="table-dark">
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Course</th>
-            <th>Age</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+    <table class="table table-hover">
 
-    <tbody>
-    {% for student in students %}
-        <tr>
-            <td>{{ student.name }}</td>
-            <td>{{ student.email }}</td>
-            <td>{{ student.phone }}</td>
-            <td>{{ student.course }}</td>
-            <td>{{ student.age }}</td>
+        <thead class="table-dark">
 
-            <td>
-                <a href="/edit/{{ student.id }}/" class="btn btn-warning btn-sm">Edit</a>
-                <a href="/delete/{{ student.id }}/" class="btn btn-danger btn-sm"
-                   onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Course</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for student in students %}
+
+            <tr>
+
+                <!-- PHOTO -->
+                <td>
+                    <img src="{{ student.photo.url }}"
+                         width="50"
+                         height="50"
+                         class="rounded-circle">
+                </td>
+
+                <!-- NAME (CLICKABLE PROFILE) -->
+                <td>
+                    <a href="{% url 'student_profile' student.id %}"
+                       class="text-decoration-none">
+                        {{ student.name }}
+                    </a>
+                </td>
+
+                <td>{{ student.email }}</td>
+
+                <td>{{ student.phone }}</td>
+
+                <td>{{ student.course }}</td>
+
+                <td>{{ student.age }}</td>
+
+                <!-- ACTIONS -->
+                <td>
+
+                    <a href="{% url 'student_profile' student.id %}"
+                       class="btn btn-info btn-sm">
+                       View
+                    </a>
+
+                    <a href="/edit/{{ student.id }}/"
+                       class="btn btn-warning btn-sm">
+                       Edit
+                    </a>
+
+                    <a href="/delete/{{ student.id }}/"
+                       class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure?')">
+                       Delete
+                    </a>
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
 
 </div>
 

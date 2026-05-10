@@ -1,0 +1,38 @@
+{% extends 'students/base.html' %}
+
+{% block content %}
+
+<h3>Attendance</h3>
+
+<div class="card card-box p-4">
+
+<table class="table table-bordered">
+
+<tr>
+    <th>Name</th>
+    <th>Status</th>
+</tr>
+
+{% for student in students %}
+<tr>
+    <td>{{ student.name }}</td>
+
+    <td>
+        <a href="/mark-attendance/{{ student.id }}/Present"
+           class="btn btn-success btn-sm">
+           Present
+        </a>
+
+        <a href="/mark-attendance/{{ student.id }}/Absent"
+           class="btn btn-danger btn-sm">
+           Absent
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

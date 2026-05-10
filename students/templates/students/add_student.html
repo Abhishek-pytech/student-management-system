@@ -6,7 +6,7 @@
 
 <div class="card card-box p-4">
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
     <input class="form-control mb-2" name="name" placeholder="Name">
@@ -14,6 +14,9 @@
     <input class="form-control mb-2" name="phone" placeholder="Phone">
     <input class="form-control mb-2" name="course" placeholder="Course">
     <input class="form-control mb-3" name="age" placeholder="Age">
+    <input type="file"
+       name="photo"
+       class="form-control mb-3">
 
     <button class="btn btn-success">Save</button>
 </form>

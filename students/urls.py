@@ -10,4 +10,11 @@ urlpatterns = [
      # login system
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('attendance/', views.attendance_page),
+
+    path(
+    'mark-attendance/<int:student_id>/<str:status>/',
+    views.mark_attendance
+    ),
+    path('student/<int:id>/', views.student_profile, name='student_profile'),
 ]
