@@ -74,15 +74,26 @@ def student_list(request):
 # ADD STUDENT
 @login_required
 def add_student(request):
-
     if request.method == "POST":
 
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        course = request.POST.get('course')
+        age = request.POST.get('age')
+
+        # SAFE CONVERSION
+        if age == "" or age is None:
+            age = 0
+        else:
+            age = int(age)
+
         Student.objects.create(
-            name=request.POST['name'],
-            email=request.POST['email'],
-            phone=request.POST['phone'],
-            course=request.POST['course'],
-            age=request.POST['age'],
+            name=name,
+            email=email,
+            phone=phone,
+            course=course,
+            age=age,
             photo=request.FILES.get('photo')
         )
 
