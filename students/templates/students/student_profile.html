@@ -12,10 +12,16 @@
             <div class="col-md-3 text-center">
 
                 {% if student.photo %}
-               <img src="{{ student.photo.url }}">
-           {% else %}
-            No Photo
-           {% endif %}
+                    <img src="{{ student.photo.url }}"
+                         width="150"
+                         height="150"
+                         class="rounded-circle shadow">
+                {% else %}
+                    <div class="border rounded-circle d-flex align-items-center justify-content-center shadow mx-auto"
+                         style="width:150px; height:150px;">
+                        No Photo
+                    </div>
+                {% endif %}
 
             </div>
 
