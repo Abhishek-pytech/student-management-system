@@ -11,10 +11,11 @@
             <!-- PHOTO -->
             <div class="col-md-3 text-center">
 
-                <img src="{{ student.photo.url }}"
-                     width="150"
-                     height="150"
-                     class="rounded-circle shadow">
+                {% if student.photo %}
+               <img src="{{ student.photo.url }}">
+           {% else %}
+            No Photo
+           {% endif %}
 
             </div>
 

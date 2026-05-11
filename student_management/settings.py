@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-sc=lqd*y)i=4(svet&c9^!089cit%j!fq57ibd75*z807eimt^'
@@ -75,7 +75,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # AUTH SETTINGS (IMPORTANT)
 LOGIN_URL = '/login/'
