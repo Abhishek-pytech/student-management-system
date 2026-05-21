@@ -14,9 +14,10 @@ class Student(models.Model):
     age = models.IntegerField()
 
     photo = models.ImageField(
-        upload_to='students/',
-        default='default.png'
-    )
+    upload_to='students/',
+    blank=True,
+    null=True
+)
 
     def __str__(self):
         return self.name
