@@ -201,8 +201,7 @@ Email: itsabhishek.patel29@gmail.com
 
 License
 
-This project is developed for learning, portfolio 
-and professional showcase purposes.
+This project is developed for learning, portfolio and professional showcase purposes.
 
 
 
